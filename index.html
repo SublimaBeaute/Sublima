@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Sublima Beauté</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+:root{--rose:#f8c7d8;--rose-clair:#fde9f0;}
+body{margin:0;font-family:Arial,sans-serif;background:var(--rose-clair)}
+.wrap{max-width:1100px;margin:auto;padding:16px}
+header{border-bottom:2px solid var(--rose);background:#fff;position:sticky;top:0;z-index:10}
+
+.topbar{display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#000}
+.brand img{width:50px}
+nav a{text-decoration:none;margin-left:12px;color:#000;font-weight:600}
+
+.search-bar{margin:15px 0}
+.search-bar input{width:100%;padding:12px;border-radius:8px;border:1px solid #ccc}
+
+.slider-container{width:100%;overflow:hidden}
+.slider-track{display:flex;transition:transform 1.8s ease-in-out}
+.slider-track img{width:100vw;height:340px;object-fit:cover}
+
+.hero{text-align:center;padding:15px;background:#fff}
+
+.delivery-text{
+margin-top:8px;
+font-size:14px;
+color:#c2185b;
+font-weight:700;
+animation:blink 1.3s infinite;
+}
+
+@keyframes blink{0%,100%{opacity:0.3}50%{opacity:1}}
+
+.arrow{display:block;font-size:22px;animation:blink 1s infinite}
+.scroll-indicator{font-size:14px;color:#777;font-style:italic}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:16px;
+margin-top:20px
+}
+
+.card{
+background:#fff;
+border:2px solid var(--rose);
+border-radius:10px;
+overflow:hidden
+}
+
+.card img{
+width:100%;
+height:220px;
+object-fit:cover
+}
+
+.info{padding:10px}
+.title{font-weight:700}
+.price{color:#c2185b;font-weight:800;margin-top:5px}
+
+.whatsapp-product{
+display:block;
+margin-top:10px;
+text-align:center;
+padding:10px;
+background:#25D366;
+color:#fff;
+text-decoration:none;
+font-weight:700;
+border-radius:8px
+}
+
+footer{
+margin-top:40px;
+background:#fff;
+padding:20px;
+text-align:center;
+border-top:2px solid var(--rose)
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="wrap topbar">
+<a class="brand" href="#">
+<img src="logo.png">
+<strong>Sublima Beauté</strong>
+</a>
+<nav>
+<a href="#produits">Produits</a>
+<a href="#contact">Contact</a>
+</nav>
+</div>
+
+<div class="wrap search-bar">
+<input type="text" id="searchInput" placeholder="Rechercher une catégorie...">
+</div>
+</header>
+
+<div class="slider-container">
+<div class="slider-track" id="sliderTrack">
+<img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1600&q=80">
+<img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1600&q=80">
+<img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=1600&q=80">
+</div>
+</div>
+
+<section class="hero">
+<div class="delivery-text">
+Livraison dans tout Abidjan : 2 000 FCFA
+<span class="arrow">↓</span>
+</div>
+<div class="scroll-indicator">
+Faites défiler vers le bas pour voir plus
+</div>
+</section>
+
+<div class="wrap">
+<section id="produits">
+<div class="products" id="productGrid"></div>
+</section>
+</div>
+
+<footer id="contact">
+<p>WhatsApp : +225 07 06 00 78 85</p>
+<p>Paiement après échange sur WhatsApp</p>
+<p>Sublima Beauté – Côte d’Ivoire</p>
+</footer>
+
+<script>
+const WHATSAPP_NUMBER="2250706007885";
+const CURRENCY="FCFA";
+
+const products=[
+{
+title:"Soins Visage",
+price:"3 000 à 25 000",
+image:"https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Soins Corps",
+price:"6 000 à 30 000",
+image:"https://images.unsplash.com/photo-1600180758895-9c8f7e1e3f6d?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Maquillage",
+price:"3 000 à 20 000",
+image:"https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Baumes & Lèvres",
+price:"2 000 à 8 000",
+image:"https://images.unsplash.com/photo-1608270586620-248524c67c2d?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Perruques & Mèches",
+price:"15 000 à 80 000",
+image:"https://images.unsplash.com/photo-1580618864180-f6d7d39b8ff6?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Accessoires Féminins",
+price:"2 500 à 15 000",
+image:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Parfums",
+price:"3 000 à 30 000",
+image:"https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Minceur & Bien-Être",
+price:"3 000 à 45 000",
+image:"https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=80"
+}
+];
+
+const grid=document.getElementById("productGrid");
+
+function afficherProduits(liste){
+grid.innerHTML="";
+liste.forEach(p=>{
+const message=`Salut, dans la catégorie ${p.title}, quels produits sont disponibles ?`;
+const wa=`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+const card=document.createElement("div");
+card.className="card";
+card.innerHTML=`
+<img src="${p.image}">
+<div class="info">
+<div class="title">${p.title}</div>
+<div class="price">${p.price} ${CURRENCY}</div>
+<a class="whatsapp-product" target="_blank" href="${wa}">
+Voir sur WhatsApp
+</a>
+</div>`;
+grid.appendChild(card);
+});
+}
+afficherProduits(products);
+
+document.getElementById("searchInput").addEventListener("input",function(){
+const val=this.value.toLowerCase();
+afficherProduits(
+products.filter(p=>p.title.toLowerCase().includes(val))
+);
+});
+
+const track=document.getElementById("sliderTrack");
+let index=0;
+setInterval(()=>{
+index++;
+if(index>=3) index=0;
+track.style.transform=`translateX(-${index*100}vw)`;
+},4500);
+</script>
+
+</body>
+</html>
